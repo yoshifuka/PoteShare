@@ -1,0 +1,45 @@
+<section class="hero is-success">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        ルーム編集
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-6">
+        <%= form_for @room do |f| %>
+          <div class="field">
+            <%= f.label :title, "ルーム名", class: "label" %>
+            <%= f.text_field :title, class: "input" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :body, "ルーム紹介", class: "label" %>
+            <%= f.text_area :body, class: "textarea" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :body, "料金", class: "label" %>
+            <%= f.number_field :price, class: "input" %>
+          </div>
+          <div class="field">
+            <%= f.label :body, "住所", class: "label" %>
+            <%= f.text_field :address, class: "input" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :image, "写真", class: "label" %>
+            <%= f.attachment_field :room_image, fallback: "no-image.png" %>
+          </div>
+
+          <%= f.submit '編集', class: "button is-success" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

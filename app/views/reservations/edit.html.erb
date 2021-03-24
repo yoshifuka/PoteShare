@@ -1,0 +1,70 @@
+<h1>Reservations#edit</h1>
+<p>Find me in app/views/reservations/edit.html.erb</p>
+<header class="header">
+      <nav class="header-inner">
+        <div class="header-left-nav">
+          <%= link_to root_path, class: "navbar-item" do %>
+            <h1 class="title is-3" style="font-family: cursive;">Poteshare</h1>
+          <% end %>
+          <div class="searchbox-container">
+            <div class="searchbox">
+              <%= form_tag(rooms_path,:method => 'get') do %>
+              <%= text_field_tag :search,"", class: "input block is-normal", placeholder: "エリア" %>
+              <% end %>
+            </div>
+            <div class="searchbox">
+              <%= form_tag(rooms_path,:method => 'get') do %>
+              <%= text_field_tag :search,"", class: "input block is-normal", placeholder: "キーワード" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="header-right-nav">
+
+          <% if user_signed_in? %>
+            <div class="navbar-end">
+              <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+                  <%= @name %>
+                </a>
+                <div class="navbar-dropdown is-right">
+                  <a class="navbar-item">
+                    <%= link_to "ルーム登録", new_room_path, class: "button is-fullwidth" %>
+                  </a>
+                  <a class="navbar-item">
+                    <%= link_to "ルーム一覧", rooms_path, class: "button is-fullwidth" %>
+                  </a>
+                  <a class="navbar-item">
+                    <%= link_to "予約ルーム一覧", room_reservations_path(current_user), class: "button is-fullwidth" %>
+                  </a>
+                  <a class="navbar-item">
+                    <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "button is-fullwidth" %>
+                  </a>
+                  <a class="navbar-item">
+                    <%= link_to "マイページ", user_path(current_user), class: "button is-fullwidth" %>
+                  </a>
+                </div>
+              </div>
+            </div>
+          <% else %>
+            <div id="navbarExampleTransparentExample" class="navbar-menu">
+              <div class="navbar-end">
+                <div class="navbar-item">
+                  <div class="field is-grouped">
+                    <p class="control">
+                      <%= link_to "ログイン", new_user_session_path, class: "button is-warning is-light" %>
+                    </p>
+                    <p class="control">
+                      <%= link_to "新規登録", new_user_registration_path, class: "button is-warning is-light" %>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+
+      </nav>
+    </header>
+    <%= yield %>
+  </body>
+</html>

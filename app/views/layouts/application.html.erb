@@ -10,6 +10,75 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header class="header">
+      <div class="header-left">
+        <div class="header-logo">
+          <%= link_to root_path, class: "navbar-item" do %>
+              <h1 class="title is-3" style="font-family: cursive;">Poteshare</h1>
+          <% end %>
+        </div>
+        <div class="header-form">
+          <div>
+            <%= form_tag(rooms_path,:method => 'get') do %>
+            <%= text_field_tag :search, "", placeholder: "エリア" %>
+            <% end %>
+          </div>
+          <div>
+            <%= form_tag(rooms_path,:method => 'get') do %>
+            <%= text_field_tag :search, "", placeholder: "キーワード" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="hedaer-right">
+      <% if user_signed_in? %>
+        <nav class="navbar is-black">
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              <%= @name %>
+            </a>
+            <div class="navbar-dropdown is-right">
+              <a class="navbar-item">
+                <%= link_to "ルーム登録", new_room_path, class: "button is-fullwidth hero is-info" %>
+              </a>
+              <a class="navbar-item">
+                <%= link_to "ルーム一覧", rooms_path, class: "button is-fullwidth hero is-info" %>
+              </a>
+              <a class="navbar-item">
+                <%= link_to "ルーム予約一覧", room_reservations_path(current_user), class: "button is-fullwidth hero is-info" %>
+              </a>
+              <a class="navbar-item">
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "button is-fullwidth hero is-info" %>
+              </a>
+              <a class="navbar-item">
+                <%= link_to "マイページ", user_path(current_user), class: "button is-fullwidth hero is-info" %>
+              </a>
+            </div>
+          </div>
+        </nav>
+      <% else %>
+        <%= link_to "ログイン", new_user_session_path, class: "button is-warning is-light" %>
+        <%= link_to "新規登録", new_user_registration_path, class: "button is-warning is-light" %>
+      <% end %>
+    </header>
+    <main>
+      <% if flash[:notice] %>
+        <div class="notification is-info">
+          <p class="notice"><%= notice %></p>
+        </div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div class="notification is-danger">
+          <p class="alert"><%= alert %></p>
+        </div>
+      <% end %>
+      <%= yield %>
+    </main>
+    <footer class="footer">
+      <p>
+        ©️2021 Yoshinori Fukagawa
+      </p>
+    </footer>
   </body>
 </html>
