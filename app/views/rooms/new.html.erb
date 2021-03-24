@@ -1,0 +1,57 @@
+<section class="hero is-info">
+  <div class="hero-body">
+    <div class="container, columns is-centered">
+      <h1 class="title">
+        ルーム登録
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <%= form_for @room do |f| %>
+        <div class="field">
+          <label class="label">部屋名</label>
+          <div class="control">
+            <%= f.text_field :title, class: "input", placeholder: "ルーム名を入力"  %>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">部屋紹介</label>
+          <div class="control ">
+            <%= f.text_area :body, class: "textarea",placeholder: "ルーム説明を入力"  %>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">料金</label>
+          <div class="control ">
+            <%= f.number_field :price, class: "input", placeholder: "1日あたりの料金を入力"  %>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">住所</label>
+          <div class="control">
+            <%= f.text_field :address, class: "input", placeholder: "住所を入力"  %>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">部屋画像</label>
+          <div class="control has-icons-left has-icons-right">
+            <%= f.attachment_field :room_image, fallback: "no-image.png" %>
+          </div>
+        </div>
+        <div class="field is-grouped is-grouped-centered register">
+          <div class="control">
+            <%= f.submit '登録',class: " button is-success" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
